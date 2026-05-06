@@ -1,0 +1,6 @@
+{
+  "name": "Growee Marketplace",
+  "description": "A food marketplace for UMKM with seller dashboards and location tracking.",
+  "requestFramePermissions": ["geolocation"],
+  "majorCapabilities": []
+}
