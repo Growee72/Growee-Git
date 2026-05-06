@@ -392,7 +392,7 @@ export default function App() {
               className="space-y-8"
             >
               {/* Hero */}
-              <div className="gradient-bg rounded-3xl p-8 md:p-12 text-center text-white relative overflow-hidden">
+              <div className="gradient-bg rounded-3xl p-8 md:p-12 text-center text-white relative overflow-hidden shadow-xl shadow-growee-purple/20">
                 <div className="relative z-10 space-y-4">
                   <div className="inline-flex items-center justify-center p-3 bg-white/20 backdrop-blur-md rounded-2xl mb-2">
                     <Leaf size={48} className="text-growee-purple" fill="currentColor" />
@@ -405,7 +405,7 @@ export default function App() {
 
               {/* Recommendations */}
               <div className="grid md:grid-cols-2 gap-8 items-start">
-                <div className="bg-white p-6 rounded-2xl shadow-sm border space-y-4">
+                <div className="bg-white p-6 rounded-3xl shadow-xl shadow-growee-purple/5 space-y-4 animate-fade-in">
                   <div className="flex items-center justify-between">
                     <h3 className="text-xl font-bold text-growee-pink flex items-center gap-2 font-display">
                        <MapPin size={24} /> UMKM Sekitar
@@ -418,7 +418,7 @@ export default function App() {
                     </button>
                   </div>
                   <p className="text-xs font-medium text-gray-500">{locationStatus}</p>
-                  <div className="aspect-video rounded-xl overflow-hidden border">
+                  <div className="aspect-video rounded-2xl overflow-hidden shadow-inner bg-gray-50">
                     <iframe 
                       src={userMapUrl} 
                       className="w-full h-full" 
@@ -435,7 +435,7 @@ export default function App() {
                     {recommendedProducts.map(p => (
                       <div 
                         key={p.id}
-                        className="bg-white p-4 rounded-xl border flex items-center justify-between hover:border-growee-pink transition-colors group"
+                        className="bg-white p-4 rounded-2xl shadow-md shadow-growee-purple/5 flex items-center justify-between hover:shadow-growee-pink/20 transition-all group cursor-pointer"
                       >
                         <div className="flex items-center gap-4">
                           <img src={p.img} alt={p.name} className="w-12 h-12 rounded-lg object-cover" />
@@ -466,8 +466,8 @@ export default function App() {
                   {products.map(p => (
                     <motion.div 
                       key={p.id} 
-                      whileHover={{ y: -5 }}
-                      className="bg-white rounded-2xl shadow-sm border overflow-hidden flex flex-col animate-fade-in"
+                      whileHover={{ y: -8, scale: 1.02 }}
+                      className="bg-white rounded-3xl shadow-xl shadow-growee-purple/5 overflow-hidden flex flex-col animate-fade-in group hover:shadow-growee-purple/10 transition-all"
                     >
                       <div className="relative aspect-[4/3] overflow-hidden">
                         <img src={p.img} alt={p.name} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
@@ -530,16 +530,16 @@ export default function App() {
               <div className="grid md:grid-cols-3 gap-8">
                 <div className="md:col-span-2 space-y-6">
                   {/* Cart Items */}
-                  <div className="bg-white rounded-2xl border shadow-sm p-6 space-y-4">
+                  <div className="bg-white rounded-3xl shadow-xl shadow-growee-purple/5 p-8 space-y-4">
                     <h3 className="font-bold text-lg mb-4 flex items-center gap-2">
-                      <ShoppingBag size={20} className="text-growee-pink" />
-                      Keranjang Anda
+                       <ShoppingBag size={20} className="text-growee-pink" />
+                       Keranjang Anda
                     </h3>
-                    <div className="divide-y">
+                    <div className="divide-y divide-gray-50">
                       {cart.map((item, idx) => (
                         <div key={item.id} className="py-4 flex justify-between items-center">
                           <div className="flex gap-4">
-                            <div className="w-16 h-16 bg-gray-100 rounded-xl overflow-hidden border">
+                            <div className="w-16 h-16 bg-gray-50 rounded-2xl overflow-hidden shadow-inner">
                               <img src={products.find(p => p.id === item.id)?.img} className="w-full h-full object-cover" />
                             </div>
                             <div>
@@ -559,24 +559,24 @@ export default function App() {
                         </div>
                       ))}
                     </div>
-                    <div className="pt-4 border-t flex justify-between items-center">
-                        <span className="font-bold text-xl">Total</span>
-                        <span className="font-bold text-2xl text-growee-pink">{formatRupiah(cartTotal)}</span>
+                    <div className="pt-6 border-t border-gray-50 flex justify-between items-center">
+                        <span className="font-bold text-xl text-gray-400">Total</span>
+                        <span className="font-bold text-3xl text-growee-pink">{formatRupiah(cartTotal)}</span>
                     </div>
                   </div>
 
                   {/* Shipping Info */}
-                  <div className="bg-white rounded-2xl border shadow-sm p-6 space-y-4">
+                  <div className="bg-white rounded-3xl shadow-xl shadow-growee-purple/5 p-8 space-y-4">
                     <h3 className="font-bold text-lg mb-4 flex items-center gap-2">
                       <Truck size={20} className="text-growee-purple" />
                       Informasi Pengiriman
                     </h3>
                     {!currentUser || currentUser.role !== UserRole.BUYER ? (
-                      <div className="bg-red-50 p-4 rounded-xl border border-red-200 text-red-700 text-sm font-medium">
+                      <div className="bg-pink-50/50 p-4 rounded-2xl text-pink-700 text-sm font-medium">
                         Silakan login sebagai Pembeli untuk melanjutkan.
                       </div>
                     ) : (
-                      <div className="grid gap-4 bg-gray-50 p-4 rounded-xl border">
+                      <div className="grid gap-4 bg-growee-light p-6 rounded-[2rem] border-none shadow-inner">
                         <div>
                           <p className="text-xs font-bold text-gray-400 uppercase tracking-tighter">Penerima</p>
                           <p className="font-bold">{currentUser.name || 'N/A'}</p>
@@ -599,7 +599,7 @@ export default function App() {
 
                 <div className="space-y-6">
                   {/* Payment Method */}
-                  <div className="bg-white rounded-2xl border shadow-sm p-6 space-y-6 sticky top-24">
+                  <div className="bg-white rounded-3xl shadow-xl shadow-growee-purple/5 p-8 space-y-6 sticky top-24">
                     <h3 className="font-bold text-lg flex items-center gap-2">
                       <CreditCard size={20} className="text-growee-purple" />
                       Metode Pembayaran
@@ -662,7 +662,7 @@ export default function App() {
           {view === 'qris' && (
             <motion.div 
                key="qris"
-               className="max-w-md mx-auto text-center space-y-8 bg-white p-8 rounded-3xl border shadow-2xl"
+               className="max-w-md mx-auto text-center space-y-8 bg-white p-10 rounded-[2.5rem] shadow-2xl shadow-growee-pink/10"
             >
               <h2 className="text-3xl font-bold text-growee-pink font-display">Pembayaran QRIS</h2>
               <div className="space-y-4">
@@ -714,7 +714,7 @@ export default function App() {
                   .filter(o => currentUser?.role === UserRole.SELLER ? true : o.email === currentUser?.email)
                   .slice().reverse()
                   .map(order => (
-                    <div key={order.id} className="bg-white p-6 rounded-2xl border shadow-sm space-y-4">
+                    <div key={order.id} className="bg-white p-6 rounded-3xl shadow-xl shadow-growee-purple/5 space-y-4 animate-fade-in">
                        <div className="flex justify-between items-start">
                           <div>
                             <p className="text-xs font-bold text-gray-400 uppercase">Order ID</p>
@@ -771,12 +771,12 @@ export default function App() {
                   { label: 'Total Produk', val: products.length, icon: ShoppingBag },
                   { label: 'Total Omzet', val: formatRupiah(orders.reduce((sum, o) => o.status === OrderStatus.DELIVERED ? sum + o.total : sum, 0)), icon: CreditCard },
                 ].map((stat, i) => (
-                  <div key={i} className="bg-white p-6 rounded-3xl border shadow-sm flex items-center gap-4">
-                    <div className="w-12 h-12 rounded-2xl bg-growee-purple/10 flex items-center justify-center text-growee-purple">
-                      <stat.icon size={24} />
+                  <div key={i} className="bg-white p-8 rounded-[2.5rem] shadow-xl shadow-growee-purple/5 flex items-center gap-4 animate-fade-in" style={{ animationDelay: `${i * 0.1}s` }}>
+                    <div className="w-14 h-14 rounded-2xl bg-growee-purple/5 flex items-center justify-center text-growee-purple shadow-inner">
+                      <stat.icon size={28} />
                     </div>
                     <div>
-                      <p className="text-xs font-bold text-gray-400 uppercase tracking-tighter">{stat.label}</p>
+                      <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">{stat.label}</p>
                       <p className="text-2xl font-bold text-growee-purple">{stat.val}</p>
                     </div>
                   </div>
@@ -785,18 +785,18 @@ export default function App() {
 
               <div className="grid md:grid-cols-2 gap-8 items-start">
                 {/* Orders List */}
-                <div className="bg-white p-6 rounded-3xl border shadow-sm space-y-6">
-                  <h3 className="font-bold text-xl">Daftar Pesanan</h3>
+                <div className="bg-white p-8 rounded-[2.5rem] shadow-xl shadow-growee-purple/5 space-y-8 animate-fade-in">
+                  <h3 className="font-bold text-2xl font-display">Daftar Pesanan</h3>
                   <div className="space-y-4">
                     {orders
                       .filter(o => o.status !== OrderStatus.DELIVERED && o.status !== OrderStatus.CANCELLED)
                       .slice().reverse()
                       .map(o => (
-                        <div key={o.id} className="p-4 rounded-2xl border bg-gray-50 space-y-3">
+                        <div key={o.id} className="p-6 rounded-3xl bg-growee-light space-y-4 shadow-inner">
                            <div className="flex justify-between items-start">
                               <div>
-                                <h4 className="font-bold">{o.buyerName}</h4>
-                                <p className="text-xs text-gray-500 truncate max-w-[150px]">{o.address}</p>
+                                <h4 className="font-bold text-lg">{o.buyerName}</h4>
+                                <p className="text-[12px] text-gray-500 truncate max-w-[200px]">{o.address}</p>
                               </div>
                               <select 
                                 value={o.status}
@@ -804,72 +804,78 @@ export default function App() {
                                   const newStatus = e.target.value as OrderStatus;
                                   setOrders(prev => prev.map(order => order.id === o.id ? { ...order, status: newStatus } : order));
                                 }}
-                                className="text-xs font-bold p-1 bg-white border rounded-lg focus:ring-1 ring-growee-pink outline-none"
+                                className="text-xs font-bold p-2 bg-white border-none shadow-sm rounded-xl focus:ring-2 ring-growee-pink outline-none"
                               >
                                 {Object.values(OrderStatus).map(s => <option key={s} value={s}>{s.toUpperCase()}</option>)}
                               </select>
                            </div>
-                           <div className="grid gap-1">
-                              {o.items.map(it => <div key={it.id} className="text-[10px] text-gray-600">• {it.name} x {it.qty}</div>)}
+                           <div className="grid gap-2 p-3 bg-white/50 rounded-xl">
+                              {o.items.map(it => <div key={it.id} className="text-[11px] text-gray-600 font-medium tracking-tight flex justify-between">
+                                <span>{it.name} x {it.qty}</span>
+                                <span className="font-bold">{formatRupiah(it.price * it.qty)}</span>
+                              </div>)}
                            </div>
-                           <div className="flex justify-between items-center pt-2 border-t mt-2">
-                             <span className="text-sm font-bold text-growee-pink">{formatRupiah(o.total)}</span>
+                           <div className="flex justify-between items-center pt-3 border-t border-gray-200/20">
+                             <span className="text-lg font-bold text-growee-pink">{formatRupiah(o.total)}</span>
                              <button 
                                onClick={() => setOrders(prev => prev.filter(order => order.id !== o.id))}
-                               className="text-red-500 p-1 hover:bg-red-50 rounded-lg"
+                               className="text-red-400 p-2 hover:bg-red-50 rounded-xl transition-colors"
                              >
-                               <Trash2 size={16} />
+                               <Trash2 size={20} />
                              </button>
                            </div>
                         </div>
                       ))}
                     {orders.filter(o => o.status !== OrderStatus.DELIVERED && o.status !== OrderStatus.CANCELLED).length === 0 && (
-                      <p className="text-center py-10 text-gray-400 text-sm">Tidak ada pesanan aktif.</p>
+                      <div className="text-center py-20">
+                        <History size={48} className="mx-auto mb-4 text-gray-200" />
+                        <p className="text-gray-400 text-sm font-medium">Tidak ada pesanan aktif.</p>
+                      </div>
                     )}
                   </div>
                 </div>
 
                 {/* Management Products */}
-                <div className="bg-white p-6 rounded-3xl border shadow-sm space-y-6">
+                <div className="bg-white p-8 rounded-[2.5rem] shadow-xl shadow-growee-purple/5 space-y-8 animate-fade-in" style={{ animationDelay: '0.2s' }}>
                   <div className="flex justify-between items-center">
-                    <h3 className="font-bold text-xl">Stok Produk</h3>
+                    <h3 className="font-bold text-2xl font-display">Stok Produk</h3>
                     <button 
                        onClick={() => {
                          setEditingProduct(null);
                          setIsProductModalOpen(true);
                        }}
-                       className="bg-growee-pink text-white p-2 rounded-full shadow-lg hover:scale-105 active:scale-95 transition-all"
+                       className="bg-growee-pink text-white p-3 rounded-2xl shadow-xl shadow-growee-pink/30 hover:scale-110 active:scale-95 transition-all"
                     >
                       <Plus size={24} />
                     </button>
                   </div>
-                  <div className="grid gap-3">
+                  <div className="grid gap-4">
                     {products.map(p => (
-                      <div key={p.id} className="p-3 border rounded-2xl flex items-center justify-between group">
-                        <div className="flex items-center gap-3">
-                           <img src={p.img} className="w-10 h-10 rounded-lg object-cover" />
+                      <div key={p.id} className="p-4 bg-growee-light rounded-3xl flex items-center justify-between group shadow-inner">
+                        <div className="flex items-center gap-4">
+                           <img src={p.img} className="w-12 h-12 rounded-2xl object-cover shadow-md" />
                            <div>
                               <p className="font-bold text-sm">{p.name}</p>
-                              <p className="text-xs text-gray-400">Stok: {p.stock} | {p.umkm_address_text ? '✅ Ada Alamat' : '❌ Tanpa Alamat'}</p>
+                              <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Stok: {p.stock}</p>
                            </div>
                         </div>
-                        <div className="flex gap-2 lg:opacity-0 group-hover:opacity-100 transition-opacity">
+                        <div className="flex gap-2">
                            <button 
                             onClick={() => {
                               setEditingProduct(p);
                               setIsProductModalOpen(true);
                             }}
-                            className="p-2 bg-blue-50 text-blue-600 rounded-xl hover:bg-blue-100"
+                            className="p-2.5 bg-white text-blue-600 rounded-xl shadow-sm hover:shadow-md transition-all active:scale-90"
                            >
-                             <Edit size={16} />
+                             <Edit size={18} />
                            </button>
                            <button 
                              onClick={() => {
                                if (confirm('Hapus produk?')) setProducts(prev => prev.filter(pr => pr.id !== p.id));
                              }}
-                             className="p-2 bg-red-50 text-red-600 rounded-xl hover:bg-red-100"
+                             className="p-2.5 bg-white text-red-600 rounded-xl shadow-sm hover:shadow-md transition-all active:scale-90"
                            >
-                             <Trash2 size={16} />
+                             <Trash2 size={18} />
                            </button>
                         </div>
                       </div>
@@ -891,7 +897,7 @@ export default function App() {
                 <UserIcon className="text-growee-pink" /> 
                 Profil Pembeli
               </h2>
-              <div className="bg-white p-8 rounded-3xl border shadow-sm space-y-6">
+              <div className="glass-card p-10 rounded-[2.5rem] shadow-2xl shadow-growee-purple/10 space-y-8">
                 <p className="text-sm text-gray-500">Perbarui informasi pengiriman Anda. Data ini akan otomatis digunakan saat checkout.</p>
                 <div className="grid gap-4">
                   <div className="space-y-1">
@@ -900,7 +906,7 @@ export default function App() {
                       type="text" 
                       value={profileForm.name} 
                       onChange={e => setProfileForm({ ...profileForm, name: e.target.value })}
-                      className="w-full p-4 bg-gray-50 border rounded-2xl focus:ring-2 ring-growee-pink outline-none font-bold" 
+                      className="w-full p-4 bg-gray-50/50 border-none rounded-2xl focus:ring-2 ring-growee-pink outline-none font-bold shadow-inner" 
                     />
                   </div>
                   <div className="space-y-1">
@@ -909,7 +915,7 @@ export default function App() {
                       type="tel" 
                       value={profileForm.contact} 
                       onChange={e => setProfileForm({ ...profileForm, contact: e.target.value })}
-                      className="w-full p-4 bg-gray-50 border rounded-2xl focus:ring-2 ring-growee-pink outline-none font-bold" 
+                      className="w-full p-4 bg-gray-50/50 border-none rounded-2xl focus:ring-2 ring-growee-pink outline-none font-bold shadow-inner" 
                     />
                   </div>
                   <div className="space-y-1">
@@ -918,17 +924,17 @@ export default function App() {
                       rows={4}
                       value={profileForm.address} 
                       onChange={e => setProfileForm({ ...profileForm, address: e.target.value })}
-                      className="w-full p-4 bg-gray-50 border rounded-2xl focus:ring-2 ring-growee-pink outline-none font-bold resize-none" 
+                      className="w-full p-4 bg-gray-50/50 border-none rounded-2xl focus:ring-2 ring-growee-pink outline-none font-bold resize-none shadow-inner" 
                     />
                   </div>
-                  <div className="pt-4 border-t space-y-1">
+                  <div className="pt-4 border-t border-gray-100 space-y-1">
                     <label className="text-xs font-bold text-gray-400 uppercase tracking-tighter">Password Baru (Kosongkan jika tetap)</label>
                     <input 
                       type="password" 
                       placeholder="••••••••"
                       value={profileForm.password} 
                       onChange={e => setProfileForm({ ...profileForm, password: e.target.value })}
-                      className="w-full p-4 bg-gray-50 border rounded-2xl focus:ring-2 ring-growee-pink outline-none font-bold" 
+                      className="w-full p-4 bg-gray-50/50 border-none rounded-2xl focus:ring-2 ring-growee-pink outline-none font-bold shadow-inner" 
                     />
                   </div>
                 </div>
@@ -963,32 +969,32 @@ export default function App() {
               initial={{ opacity: 0, scale: 0.95, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 20 }}
-              className="bg-white max-w-sm w-full rounded-3xl p-8 relative z-10 shadow-2xl space-y-6"
+              className="glass-card max-w-sm w-full rounded-[2.5rem] p-10 relative z-10 shadow-2xl shadow-growee-purple/20 space-y-8"
             >
               <div className="text-center space-y-2">
                 <h3 className="text-2xl font-bold text-growee-purple font-display">Selamat Datang</h3>
                 <p className="text-sm text-gray-500">Masuk untuk menikmati kuliner UMKM terbaik.</p>
               </div>
               
-              <div className="space-y-4">
+              <div className="space-y-6">
                 <input 
                   type="email" 
                   placeholder="Email" 
                   value={loginForm.email}
                   onChange={e => setLoginForm({ ...loginForm, email: e.target.value })}
-                  className="w-full p-4 bg-gray-50 border rounded-2xl outline-none focus:ring-2 ring-growee-pink font-medium"
+                  className="w-full p-5 bg-gray-50/80 border-none rounded-3xl outline-none focus:ring-2 ring-growee-pink font-medium shadow-inner transition-all"
                 />
                 <input 
                   type="password" 
                   placeholder="Password" 
                   value={loginForm.password}
                   onChange={e => setLoginForm({ ...loginForm, password: e.target.value })}
-                  className="w-full p-4 bg-gray-50 border rounded-2xl outline-none focus:ring-2 ring-growee-pink font-medium"
+                  className="w-full p-5 bg-gray-50/80 border-none rounded-3xl outline-none focus:ring-2 ring-growee-pink font-medium shadow-inner transition-all"
                 />
-                {loginForm.error && <p className="text-xs text-red-500 font-bold">{loginForm.error}</p>}
+                {loginForm.error && <p className="text-xs text-red-500 font-bold ml-2 animate-bounce">{loginForm.error}</p>}
                 <button 
                   onClick={handleLogin}
-                  className="w-full py-4 bg-growee-pink text-white rounded-2xl font-bold shadow-lg hover:bg-growee-pink/90 transition-all active:scale-95"
+                  className="w-full py-5 bg-growee-pink text-white rounded-3xl font-bold shadow-xl shadow-growee-pink/30 hover:scale-[1.02] transition-all active:scale-95 text-lg"
                 >
                   MASUK
                 </button>
@@ -1023,52 +1029,52 @@ export default function App() {
               initial={{ opacity: 0, scale: 0.95, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 20 }}
-              className="bg-white max-w-md w-full rounded-3xl p-8 relative z-10 shadow-2xl space-y-6 overflow-y-auto max-h-[90vh]"
+              className="glass-card max-w-md w-full rounded-[2.5rem] p-10 relative z-10 shadow-2xl shadow-growee-purple/20 space-y-8 overflow-y-auto max-h-[90vh]"
             >
-               <h3 className="text-2xl font-bold text-center font-display">Daftar Akun Baru</h3>
+               <h3 className="text-3xl font-bold text-center font-display text-growee-purple tracking-tight">Daftar Akun</h3>
                <div className="space-y-4">
                   <input 
                     placeholder="Nama Lengkap" 
                     value={registerForm.name}
                     onChange={e => setRegisterForm({ ...registerForm, name: e.target.value })}
-                    className="w-full p-4 bg-gray-50 border rounded-2xl" 
+                    className="w-full p-5 bg-gray-50/80 border-none rounded-3xl outline-none focus:ring-2 ring-growee-pink shadow-inner font-medium" 
                   />
                   <input 
                     placeholder="Email" 
                     value={registerForm.email}
                     onChange={e => setRegisterForm({ ...registerForm, email: e.target.value })}
-                    className="w-full p-4 bg-gray-50 border rounded-2xl" 
+                    className="w-full p-5 bg-gray-50/80 border-none rounded-3xl outline-none focus:ring-2 ring-growee-pink shadow-inner font-medium" 
                   />
                   <input 
                     type="password"
                     placeholder="Password" 
                     value={registerForm.password}
                     onChange={e => setRegisterForm({ ...registerForm, password: e.target.value })}
-                    className="w-full p-4 bg-gray-50 border rounded-2xl" 
+                    className="w-full p-5 bg-gray-50/80 border-none rounded-3xl outline-none focus:ring-2 ring-growee-pink shadow-inner font-medium" 
                   />
                   <input 
                     placeholder="Nomor HP" 
                     value={registerForm.contact}
                     onChange={e => setRegisterForm({ ...registerForm, contact: e.target.value })}
-                    className="w-full p-4 bg-gray-50 border rounded-2xl" 
+                    className="w-full p-5 bg-gray-50/80 border-none rounded-3xl outline-none focus:ring-2 ring-growee-pink shadow-inner font-medium" 
                   />
                   <textarea 
                     placeholder="Alamat Lengkap" 
                     rows={3}
                     value={registerForm.address}
                     onChange={e => setRegisterForm({ ...registerForm, address: e.target.value })}
-                    className="w-full p-4 bg-gray-50 border rounded-2xl resize-none" 
+                    className="w-full p-5 bg-gray-50/80 border-none rounded-3xl outline-none focus:ring-2 ring-growee-pink shadow-inner resize-none font-medium text-sm" 
                   />
-                  {registerForm.error && <p className="text-xs text-red-500 font-bold">{registerForm.error}</p>}
+                  {registerForm.error && <p className="text-xs text-red-500 font-bold ml-2">{registerForm.error}</p>}
                   <button 
                      onClick={handleRegister}
-                     className="w-full py-4 bg-growee-pink text-white rounded-2xl font-bold shadow-lg"
+                     className="w-full py-5 bg-growee-pink text-white rounded-3xl font-bold shadow-xl shadow-growee-pink/30 hover:scale-[1.02] transition-all active:scale-95 text-lg"
                   >
                      DAFTAR
                   </button>
                </div>
-               <p className="text-center text-sm">
-                  Sudah punya akun? <button onClick={() => { setIsRegisterModalOpen(false); setIsLoginModalOpen(true); }} className="text-growee-purple font-bold">Login</button>
+               <p className="text-center text-sm text-gray-500">
+                  Sudah punya akun? <button onClick={() => { setIsRegisterModalOpen(false); setIsLoginModalOpen(true); }} className="text-growee-purple font-bold hover:underline">Login</button>
                </p>
             </motion.div>
           </div>
@@ -1090,7 +1096,7 @@ export default function App() {
               initial={{ opacity: 0, scale: 0.95, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 20 }}
-              className="bg-white max-w-lg w-full rounded-3xl p-8 relative z-10 shadow-2xl space-y-6"
+              className="glass-card max-w-lg w-full rounded-[2.5rem] p-10 relative z-10 shadow-2xl shadow-growee-purple/20 space-y-8"
             >
                <div className="flex justify-between items-start">
                  <h3 className="text-2xl font-bold text-growee-purple font-display">Detail UMKM</h3>
@@ -1139,7 +1145,7 @@ export default function App() {
               initial={{ opacity: 0, scale: 0.95, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 20 }}
-              className="bg-white max-w-md w-full rounded-3xl p-8 relative z-10 shadow-2xl space-y-6 overflow-y-auto max-h-[90vh]"
+              className="glass-card max-w-md w-full rounded-[2.5rem] p-10 relative z-10 shadow-2xl shadow-growee-purple/20 space-y-8 overflow-y-auto max-h-[90vh]"
             >
                <h3 className="text-2xl font-bold font-display">{editingProduct ? 'Edit' : 'Tambah'} Produk</h3>
                <form onSubmit={handleSaveProduct} className="space-y-4">
